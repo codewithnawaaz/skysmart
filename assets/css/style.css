@@ -137,6 +137,33 @@ h6 {
   max-height: 5rem;
 }
 
+/* marquee */
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  padding: 30px 0;
+}
+.marquee-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+}
+.marquee-container img {
+  height: 70px;
+  margin: 0 15px;
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+/*  */
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
