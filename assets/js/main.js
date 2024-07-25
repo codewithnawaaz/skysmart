@@ -272,72 +272,27 @@
     });
   });
 })();
-// resume post
 
-// Original script URL for the resume form
-// const scriptUrl =
-//   "https://script.google.com/macros/s/AKfycbxyo7K8oS5tdjJsNWZKSVhIA-tQqpbKuSet_0ivE-Rf14TBWTSjHCrW3p5Ork2OAe4/exec";
-// const form = document.forms["google-sheet"];
-// const successMessage = document.querySelector(".success-message");
-// const errorMessage = document.querySelector(".error-message");
-// const username = document.querySelector("#name");
-// const loading = document.querySelector(".loading");
+// form control///
+const scriptUrl =
+  "https://script.google.com/macros/s/AKfycbwrkrreM19P5wbWhtK61rltF1fOYPW9ZDh3hYo3SgJBrNj7RSkru44fxmeGGa67nT9d/exec";
+const form = document.forms["google-sheet"];
+const successMessage = document.querySelector(".success-message");
+const errorMessage = document.querySelector(".error-message");
+const username = document.querySelector("#name");
+const loading = document.querySelector(".loading");
 
-// form.addEventListener("submit", async (e) => {
-//   let userName = username.value;
-//   e.preventDefault();
-//   loading.style.display = "block";
-
-//   try {
-//     const response = await fetch(scriptUrl, {
-//       method: "POST",
-//       body: new FormData(form),
-//     });
-
-//     if (response.ok) {
-//       successMessage.style.display = "block";
-
-//       // Enhance success message to include the user's name and mention the resume
-//       successMessage.innerHTML = `Thank you, ${userName}, for contacting me. Your form, including the resume, has been submitted successfully.`;
-
-//       form.style.opacity = ".5";
-//       form.style.pointerEvents = "none";
-//       form.reset();
-//     } else {
-//       errorMessage.textContent =
-//         "An error occurred while submitting the form. Please try again later.";
-//     }
-//   } catch (error) {
-//     errorMessage.textContent =
-//       "An error occurred while submitting the form. Please try again later.";
-//     console.error("Error!", error.message);
-//   } finally {
-//     loading.style.display = "none";
-//   }
-// });
-function submitForm(form, scriptUrl) {
-  const successMessage = form.querySelector(".success-message");
-  const errorMessage = form.querySelector(".error-message");
-  const username = form.querySelector("#name");
-  const loading = form.querySelector(".loading");
-
-  form.addEventListener("submit", async (e) => {
-    let userName = username.value;
-    e.preventDefault();
-    loading.style.display = "block";
-
-    try {
-      const response = await fetch(scriptUrl, {
-        method: "POST",
-        body: new FormData(form),
-      });
-
+form.addEventListener("submit", (e) => {
+  let userName = username.value;
+  e.preventDefault();
+  loading.style.display = "block";
+  fetch(scriptUrl, { method: "POST", body: new FormData(form) })
+    .then((response) => {
       if (response.ok) {
         successMessage.style.display = "block";
 
-        // Enhance success message to include the user's name and mention the resume
-        successMessage.innerHTML = `Thank you, ${userName}, for contacting me. we will back to you soon.`;
-
+        successMessage.textContent = `  Thank you ${userName} for contact me.`;
+        loading.style.display = "none";
         form.style.opacity = ".5";
         form.style.pointerEvents = "none";
         form.reset();
@@ -345,23 +300,10 @@ function submitForm(form, scriptUrl) {
         errorMessage.textContent =
           "An error occurred while submitting the form. Please try again later.";
       }
-    } catch (error) {
+    })
+    .catch((error) => {
       errorMessage.textContent =
         "An error occurred while submitting the form. Please try again later.";
       console.error("Error!", error.message);
-    } finally {
-      loading.style.display = "none";
-    }
-  });
-}
-
-// Example usage:
-const form1 = document.forms["google-sheet1"];
-const scriptUrl1 =
-  "https://script.google.com/macros/s/AKfycbxyo7K8oS5tdjJsNWZKSVhIA-tQqpbKuSet_0ivE-Rf14TBWTSjHCrW3p5Ork2OAe4/exec";
-submitForm(form1, scriptUrl1);
-
-const form2 = document.forms["google-sheet2"];
-const scriptUrl2 =
-  "https://script.google.com/macros/s/AKfycbwBiSJw_03NBAbBhAd1eXbLswvVAB3ZsPug8zWH9Yn3pFgbvWaJciXvvMzBKZ0xxL6V/exec";
-submitForm(form2, scriptUrl2);
+    });
+});
