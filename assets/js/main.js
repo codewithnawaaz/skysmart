@@ -307,3 +307,15 @@ form.addEventListener("submit", (e) => {
       console.error("Error!", error.message);
     });
 });
+// marquee
+
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".marquee-container");
+  const marqueeWidth = container.scrollWidth;
+  const viewportWidth = container.parentElement.offsetWidth;
+
+  // Duplicate content
+  container.innerHTML += container.innerHTML;
+
+  container.style.width = `${marqueeWidth * 2}px`;
+});
